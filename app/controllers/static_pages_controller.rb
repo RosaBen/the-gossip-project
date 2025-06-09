@@ -1,5 +1,8 @@
 class StaticPagesController < ApplicationController
   def contact
-    puts "hello world"
+  end
+
+  def team
+
   end
 end
