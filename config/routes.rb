@@ -7,6 +7,8 @@ Rails.application.routes.draw do
    # get "/teams", to: "teams#index"
    get "/static_pages/contact", to: "static_pages#contact", as: "contact"
    get "/static_pages/team", to: "static_pages#team", as: "team"
+   get "/gossips/:id", to: "gossips#show"
+
 
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)

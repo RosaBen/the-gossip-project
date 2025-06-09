@@ -11,8 +11,12 @@
     <% @gossips.each do |gossip| %>
 
     <div>
-        <%= gossip.title %>
-        <%= gossip.content %>
+        <a href="/gossips/<%= gossip.id %>">
+            <%= gossip.title %>
+        </a>
+        <a href="/gossips/<%= gossip.id %>">
+            <%= gossip.content %>
+        </a>
 
     </div>
     <% end %>

@@ -3,4 +3,7 @@ class GossipsController < ApplicationController
     @gossips = Gossip.all
     puts @gossips[0]
   end
+  def show
+    @gossip = Gossip.find(params[:id])
+  end
 end
