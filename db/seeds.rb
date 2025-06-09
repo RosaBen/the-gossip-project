@@ -7,3 +7,17 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+require "faker"
+
+puts "Nettoyage des données..."
+City.delete_all
+ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='cities'")
+
+puts "Ajout des villes..."
+10.times do
+    City.create!(
+        name: Faker::Address.city,
+        zip_code: Faker::Number.number(digits: 5)
+    )
+end
