@@ -11,12 +11,16 @@
 require "faker"
 
 puts "Nettoyage des données..."
+GossipTag.delete_all
 City.delete_all
 User.delete_all
 Gossip.delete_all
+Tag.delete_all
+ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='gossips_tags'")
 ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='cities'")
 ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='users'")
 ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='gossips'")
+ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='tags'")
 
 puts "Ajout des villes"
 10.times do
@@ -44,5 +48,21 @@ puts "Ajouts des gossips"
         title: Faker::Lorem.sentence(word_count: 1),
         content: Faker::Lorem.paragraph(sentence_count: 2),
         user_id: User.all.sample.id
+    )
+end
+
+
+puts "Ajouts des tags"
+10.times do 
+    Tag.create!(
+        title: "#{Faker::Lorem.characters(number: rand(3..10))}"
+    )
+end
+
+puts "Ajouts de table jointure tag avec gossip"
+10.times do
+    GossipTag.create!(
+        gossip_id: Gossip.all.sample.id,
+        tag_id: Tag.all.sample.id
     )
 end

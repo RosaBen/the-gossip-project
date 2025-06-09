@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_09_085014) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_09_090627) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.string "zip_code"
     t.index ["name", "zip_code"], name: "index_cities_on_name_and_zip_code", unique: true
+  end
+
+  create_table "gossip_tags", force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "gossip_id"
+    t.index ["gossip_id"], name: "index_gossip_tags_on_gossip_id"
+    t.index ["tag_id"], name: "index_gossip_tags_on_tag_id"
   end
 
   create_table "gossips", force: :cascade do |t|
@@ -22,6 +29,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_09_085014) do
     t.text "content"
     t.integer "user_id"
     t.index ["user_id"], name: "index_gossips_on_user_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "title"
+    t.index ["title"], name: "index_tags_on_title", unique: true
   end
 
   create_table "users", force: :cascade do |t|
