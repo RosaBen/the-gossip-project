@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_09_080959) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_09_082830) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.string "zip_code"
     t.index ["name", "zip_code"], name: "index_cities_on_name_and_zip_code", unique: true
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "email"
+    t.text "description", null: false
+    t.integer "age", null: false
+    t.integer "city_id"
+    t.index ["city_id"], name: "index_users_on_city_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 end
