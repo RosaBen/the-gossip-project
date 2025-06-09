@@ -1,0 +1,13 @@
+<h1>Tous les Gossips</h1>
+<p>Voici la liste de tous les gossips</p>
+
+<div id="gossips">
+    <% @gossips.each do |gossip| %>
+
+    <div>
+        <%= gossip.title %>
+        <%= gossip.content %>
+
+    </div>
+    <% end %>
+</div>

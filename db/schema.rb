@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_09_090627) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_09_092904) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.string "zip_code"
@@ -29,6 +29,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_09_090627) do
     t.text "content"
     t.integer "user_id"
     t.index ["user_id"], name: "index_gossips_on_user_id"
+  end
+
+  create_table "private_messages", force: :cascade do |t|
+    t.text "content"
   end
 
   create_table "tags", force: :cascade do |t|

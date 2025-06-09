@@ -66,3 +66,12 @@ puts "Ajouts de table jointure tag avec gossip"
         tag_id: Tag.all.sample.id
     )
 end
+
+puts "Ajouts de messages privés"
+10.times do
+    PrivateMessage.create!(
+        content: Faker::Lorem.characters(number: rand(10..250)),
+        # sender_id: User.all.sample.id,
+        # recipient_id: User.all.sample.id
+    )
+end
