@@ -13,8 +13,10 @@ require "faker"
 puts "Nettoyage des données..."
 City.delete_all
 User.delete_all
+Gossip.delete_all
 ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='cities'")
 ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='users'")
+ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='gossips'")
 
 puts "Ajout des villes"
 10.times do
@@ -33,5 +35,14 @@ puts "Ajout des utilisateurs"
         description: Faker::Lorem.paragraph(sentence_count: 3),
         age: rand(18..100),
         city_id: City.all.sample.id
+    )
+end
+
+puts "Ajouts des gossips"
+10.times do 
+    Gossip.create!(
+        title: Faker::Lorem.sentence(word_count: 1),
+        content: Faker::Lorem.paragraph(sentence_count: 2),
+        user_id: User.all.sample.id
     )
 end
