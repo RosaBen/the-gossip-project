@@ -1,0 +1,22 @@
+<header>
+    <nav>
+        <%= link_to "Contact", contact_path, class: "nav-link" %>
+        <%= link_to "Team", team_path, class: "nav-link" %>
+    </nav>
+</header>
+<h1>Tous les Gossips</h1>
+<p>Voici la liste de tous les gossips</p>
+
+<%= link_to "Créer un nouveau gossip", new_gossip_path %>
+
+<div id="gossips">
+    <% @gossips.each do |gossip| %>
+
+    <div>
+        <h2><%= gossip.title %></h2>
+        <p><%= truncate(gossip.content, length: 100, separator: ' ') %></p>
+        <%= link_to "Lire plus", gossip_path(gossip), class: "btn" %>
+
+    </div>
+    <% end %>
+</div>
