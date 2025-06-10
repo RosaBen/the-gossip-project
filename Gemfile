@@ -65,3 +65,5 @@ end
 gem "faker"
 
 gem "table_print"
+
+gem "simple_form"

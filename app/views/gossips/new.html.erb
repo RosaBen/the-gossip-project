@@ -1,13 +1,15 @@
-<%= form_with model: @gossip, local: true do |form| %>
+<%= form_tag gossips_path, method: :post do %>
 <div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= label_tag :title, "Titre" %>
+    <%= text_field_tag :title, @gossip.title %>
+
+    <br /><br />
+
+    <%= label_tag :content, "Gossip" %>
+    <%= text_area_tag :content, @gossip.content %>
+
+    <br /><br />
 </div>
 
-<div>
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-</div>
-
-<%= form.submit "Créer le gossip" %>
+<%= submit_tag "Create Gossip" %>
 <% end %>

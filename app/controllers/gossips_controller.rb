@@ -16,18 +16,16 @@ class GossipsController < ApplicationController
   end
 
 def create
-  @gossip = Gossip.new(gossip_params)
-  @gossip.user_id = session[:user_id]
+  @gossip = Gossip.new(
+    title: params[:title],
+    content: params[:content],
+    user_id: session[:user_id]
+  )
 
   if @gossip.save
-    redirect_to @gossip
+    redirect_to gossips_path
   else
-    render :new, status: :unprocessable_entity
+    render :new
   end
 end
-
-
-  def gossip_params
-    params.require(:gossip).permit(:title, :content, :user_id)
-  end
 end

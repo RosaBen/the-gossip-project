@@ -33,8 +33,6 @@
         <nav>
             <% if session[:user_id] %>
             <%= button_to "Se déconnecter", logout_path, method: :delete, class: "btn btn-link", form: { style: "display: inline;" } %>
-            <% else %>
-            <%= link_to "Se connecter", login_path %>
             <% end %>
 
         </nav>
