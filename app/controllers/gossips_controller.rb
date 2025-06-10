@@ -3,7 +3,7 @@ class GossipsController < ApplicationController
         unless session[:user_id]
       redirect_to login_path, alert: "Veuillez vous connecter"
       return
-    end
+        end
     @gossips = Gossip.all
   end
 

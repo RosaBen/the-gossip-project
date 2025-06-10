@@ -42,14 +42,10 @@ puts "Ajout des utilisateurs"
 end
 
 puts "Ajouts des gossips"
-10.times do 
+10.times do
     Gossip.create!(
         title: Faker::Lorem.sentence(word_count: 1),
         content: Faker::Lorem.paragraph(sentence_count: 2),
         user_id: User.all.sample.id
     )
 end
-
-
-
-
