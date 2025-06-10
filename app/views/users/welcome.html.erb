@@ -1,0 +1,6 @@
+<h1>Welcome <%= @user.first_name %> <%= @user.last_name %></h1>
+<button type="button" class="btn welcome"><%= link_to "Voir tous les gossips", gossips_path %>
+</button>
+
+<button type="button" class="btn welcome"><%= link_to "Se déconnecter", logout_path, method: :delete %>
+</button>

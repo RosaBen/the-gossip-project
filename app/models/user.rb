@@ -3,4 +3,10 @@ class User < ApplicationRecord
     has_many :gossips
 
     validates :email, presence: true, uniqueness: true
+
+  def self.find_by_full_name(first_name, last_name)
+    where("LOWER(first_name) = ? AND LOWER(last_name) = ?", first_name.downcase, last_name.downcase).first
+  end
+
+
 end

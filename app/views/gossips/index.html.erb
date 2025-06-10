@@ -7,6 +7,8 @@
 <h1>Tous les Gossips</h1>
 <p>Voici la liste de tous les gossips</p>
 
+<%= link_to "Créer un nouveau gossip", new_gossip_path %>
+
 <div id="gossips">
     <% @gossips.each do |gossip| %>
 
