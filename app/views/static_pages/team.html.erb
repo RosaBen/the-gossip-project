@@ -1,5 +1,27 @@
-<div>
-    <h2>"voici notre équipe lol mdr 😇❤️😻"
-    </h2>
-    <%= image_tag("rosa.png", alt: "avatar Rosa", class: "team-img") %>
+<div class="container py-5">
+    <h2 class="text-center text-primary mb-4">Voici notre équipe 😇❤️😻</h2>
+
+    <div id="teamCarousel" class="carousel carousel-fade slide shadow-lg bg-light rounded p-4" data-bs-ride="carousel" style="max-width: 600px; margin: auto;">
+        <div class="carousel-inner">
+            <% @team_members.each_with_index do |member, index| %>
+            <div class="carousel-item <%= 'active' if index == 0 %> text-center">
+                <%= image_tag member[:image], alt: member[:name], class: "rounded-circle d-block mx-auto", style: "height: 250px; width: 250px; object-fit: cover;" %>
+                <div class="mt-4">
+                    <h4 class="fw-bold"><%= member[:name] %></h4>
+                    <p class="text-muted fst-italic">"<%= member[:quote] %>"</p>
+                </div>
+            </div>
+            <% end %>
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#teamCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+            <span class="visually-hidden">Précédent</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#teamCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+            <span class="visually-hidden">Suivant</span>
+        </button>
+    </div>
 </div>

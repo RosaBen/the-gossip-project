@@ -8,4 +8,30 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+.speech-bubble {
+    position: relative;
+    background: #f8f9fa;
+    /* gris très clair */
+    border-radius: .5rem;
+}
 
+/* pointe de la bulle */
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    /* ajuste la hauteur sous la bulle */
+    left: 30px;
+    /* position horizontale de la pointe */
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: #f8f9fa;
+    /* même couleur que le fond */
+}
+
+
+.postit-card {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}

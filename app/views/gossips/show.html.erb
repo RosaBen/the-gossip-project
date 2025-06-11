@@ -1,5 +1,30 @@
-<h2><%= @gossip.title %></h2>
+<div class="card mb-5 shadow-sm">
+    <div class="row g-0">
+        <!-- Colonne image -->
+        <div class="col-md-4 d-flex align-items-center justify-content-center p-4">
+            <%= image_tag 'placeholder_avatar.png',
+                    alt: @gossip.user.fullname,
+                    class: "img-fluid rounded-circle border border-2 border-primary",
+                    style: "max-width: 150px;" %>
+        </div>
 
-<%= link_to "Back", gossips_path %>
+        <!-- Colonne contenu -->
+        <div class="col-md-8">
+            <div class="card-body">
+                <h2 class="card-title text-primary mb-3"><%= @gossip.title %></h2>
 
-<p><%= @gossip.content %></p>
+                <div class="speech-bubble bg-light p-4 mb-3">
+                    <%= simple_format(@gossip.content) %>
+                </div>
+
+                <p class="text-muted small mb-3">
+                    Par <strong><%= @gossip.user.fullname %></strong>
+                    <% if @gossip.user.city %>de <strong><%= @gossip.user.city.name %></strong><% end %>
+                    • <%= l(@gossip.created_at, format: :long) %>
+                </p>
+
+                <%= link_to "← Retour à la liste", gossips_path, class: "btn btn-outline-primary" %>
+            </div>
+        </div>
+    </div>
+</div>

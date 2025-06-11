@@ -1,5 +1,40 @@
-<div>
-    <h2>Gossips - commentça marche!
-    </h2>
-    <p>Ajoutez de nouveaux gossips collectés</p>
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Bienvenue sur The Gossip Project 💬</h1>
+        <p class="lead text-muted">Ici, les secrets se murmurent... mais jamais ne disparaissent 🕵️‍♀️</p>
+    </div>
+
+    <div class="bg-light p-4 rounded shadow mb-5">
+        <h2 class="h4 text-secondary">Comment ça marche ?</h2>
+        <ol class="text-muted">
+            <li>Connecte-toi ou crée un compte (juste ton prénom et nom).</li>
+            <li>Rédige un gossip anonyme ou juteux !</li>
+            <li>Découvre ceux des autres et fais tourner l’info… discrètement 🤫</li>
+        </ol>
+        <%= link_to "Voir tous les gossips", gossips_path, class: "btn btn-primary mt-3" %>
+    </div>
+
+    <h2 class="mb-4 text-center text-secondary">Les derniers potins 💣</h2>
+
+    <div class="d-flex flex-wrap justify-content-center position-relative" style="min-height: 300px;">
+        <% colors = ['#fffd82', '#ffc9de', '#c9f2ff', '#d1ffc9', '#ffe0ac'] %>
+        <% rotations = [-5, 3, -2, 4, -4] %>
+
+        <% @gossips.each_with_index do |gossip, index| %>
+        <div class="postit-card shadow position-absolute p-3" style="
+        width: 200px;
+        background-color: <%= colors[index % colors.length] %>;
+        transform: rotate(<%= rotations[index % rotations.length] %>deg);
+        top: <%= rand(0..150) %>px;
+        left: <%= rand(0..300) %>px;
+        z-index: <%= 10 - index %>;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      ">
+            <h5 class="fw-bold"><%= truncate(gossip.title, length: 25) %></h5>
+            <p class="small"><%= truncate(gossip.content, length: 100) %></p>
+            <%= link_to "Lire", gossip_path(gossip), class: "btn btn-sm btn-outline-dark" %>
+        </div>
+        <% end %>
+    </div>
 </div>
