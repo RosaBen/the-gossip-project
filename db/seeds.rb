@@ -30,6 +30,7 @@ puts "Ajout des villes"
 end
 
 puts "Ajout des utilisateurs"
+User.create!(first_name: "Anonymous", last_name: "", email: "anonymous@test.com", description: "", age: 18, city_id: 1)
 10.times do
     User.create!(
         last_name: Faker::Name.last_name,
@@ -40,6 +41,8 @@ puts "Ajout des utilisateurs"
         city_id: City.all.sample.id
     )
 end
+
+
 
 puts "Ajouts des gossips"
 10.times do

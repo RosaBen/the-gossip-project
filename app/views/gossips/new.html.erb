@@ -1,15 +1,19 @@
-<%= form_tag gossips_path, method: :post do %>
-<div>
-    <%= label_tag :title, "Titre" %>
-    <%= text_field_tag :title, @gossip.title %>
-
-    <br /><br />
-
-    <%= label_tag :content, "Gossip" %>
-    <%= text_area_tag :content, @gossip.content %>
-
-    <br /><br />
+<%= form_with model: @gossip, url: gossips_path, local: true do |form| %>
+<div class="mb-3">
+    <%= form.label :title, "Titre" %>
+    <%= form.text_field :title, class: "form-control #{'is-invalid' if @gossip.errors[:title].any?}" %>
+    <% @gossip.errors[:title].each do |msg| %>
+    <div class="invalid-feedback"><%= msg %></div>
+    <% end %>
 </div>
 
-<%= submit_tag "Create Gossip" %>
+<div class="mb-3">
+    <%= form.label :content, "Contenu" %>
+    <%= form.text_area :content, class: "form-control #{'is-invalid' if @gossip.errors[:content].any?}" %>
+    <% @gossip.errors[:content].each do |msg| %>
+    <div class="invalid-feedback"><%= msg %></div>
+    <% end %>
+</div>
+
+<%= form.submit "Créer Gossip", class: "btn btn-primary" %>
 <% end %>

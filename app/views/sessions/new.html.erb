@@ -1,21 +1,19 @@
-<h1>Se connecter</h1>
-
-<%= form_with url: login_path, method: :post, local: true do %>
 <div>
-    <%= label_tag :first_name, "Prénom" %><br>
-    <%= text_field_tag :first_name %>
-</div>
+    <h2>Se connecter</h2>
 
-<div>
-    <%= label_tag :last_name, "Nom" %><br>
-    <%= text_field_tag :last_name %>
-</div>
+    <%= form_with url: login_path, method: :post, local: true do %>
+    <div>
+        <%= label_tag :first_name, "Prénom" %><br>
+        <%= text_field_tag :first_name %>
+    </div>
 
-<div>
-    <%= submit_tag "Se connecter" %>
-</div>
-<% end %>
+    <div>
+        <%= label_tag :last_name, "Nom" %><br>
+        <%= text_field_tag :last_name %>
+    </div>
 
-<% if flash[:alert] %>
-<p style="color:red;"><%= flash[:alert] %></p>
-<% end %>
+    <div>
+        <%= submit_tag "Se connecter" %>
+    </div>
+    <% end %>
+</div>

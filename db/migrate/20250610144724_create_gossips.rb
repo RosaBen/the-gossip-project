@@ -4,7 +4,7 @@ class CreateGossips < ActiveRecord::Migration[8.0]
       t.string :title
       t.text :content
       t.belongs_to :user, index: true
-      # t.timestamps
+      t.timestamps
     end
   end
 end

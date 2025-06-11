@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration[8.0]
       t.text :description, null: false
       t.integer :age, null: false
       t.belongs_to :city, index: true
-      # t.timestamps
+      t.timestamps
     end
   end
 end
