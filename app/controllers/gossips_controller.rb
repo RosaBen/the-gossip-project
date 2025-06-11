@@ -1,5 +1,4 @@
 class GossipsController < ApplicationController
-
   before_action :require_login
 
 def require_login
@@ -30,32 +29,49 @@ end
 
 # ----------------------------------------------------------
 
-
 def create
-  unless session[:user_id]
-    flash[:alert] = "🚫 Vous devez être connecté pour créer un gossip."
-    redirect_to login_path and return
-  end
+  user = User.find(session[:user_id]) # 👈 current_user
 
   @gossip = Gossip.new(gossip_params)
-  @gossip.user_id = session[:user_id]
+  @gossip.user = user # 👈 créateur du gossip (toujours)
+
+  # 👇 Choix de l'auteur affiché dans le gossip :
+  if params[:anonymous] == "1"
+    author = Author.find_or_create_by(first_name: "Anonymous", last_name: "", user_id: user.id)
+  elsif params[:is_me] == "1"
+    author = Author.find_or_create_by(first_name: user.first_name, last_name: user.last_name, user_id: user.id)
+  elsif params[:new_author_name].present?
+    first_name, last_name = params[:new_author_name].split(" ", 2)
+    author = Author.create(first_name: first_name, last_name: last_name, user_id: user.id)
+  elsif params[:gossip][:author_id].present?
+    author_id = params[:gossip][:author_id].to_i
+
+    if author_id < 0
+      user_author = User.find(-author_id)
+      author = Author.find_or_create_by(first_name: user_author.first_name, last_name: user_author.last_name, user_id: user.id)
+    else
+      author = Author.find(author_id)
+    end
+  else
+    flash.now[:alert] = "Aucun auteur sélectionné"
+    render :new, status: :unprocessable_entity and return
+  end
+
+  @gossip.author = author
 
   if @gossip.save
     flash[:notice] = "✅ Gossip bien créé !"
-    redirect_to gossips_path
+    redirect_to gossip_path(@gossip)
   else
-    puts "Erreur(s) validation :"
-    puts @gossip.errors.full_messages # ← DEBUG
     flash.now[:alert] = "❌ Remplis bien tous les champs."
     render :new, status: :unprocessable_entity
   end
 end
 
-  # ----------------------------------------------------------
-  private
+
+private
 
 def gossip_params
   params.require(:gossip).permit(:title, :content)
 end
-
 end

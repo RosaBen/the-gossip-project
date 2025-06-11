@@ -52,3 +52,13 @@ puts "Ajouts des gossips"
         user_id: User.all.sample.id
     )
 end
+
+puts "ajouts des auteurs"
+
+10.times do
+Author.create!(
+    last_name: Faker::Name.last_name,
+        first_name: Faker::Name.first_name
+)
+end
+

@@ -15,5 +15,57 @@
     <% end %>
 </div>
 
+<!-- Switch: Je suis l’auteur -->
+<div class="form-check form-switch mb-3">
+    <input type="checkbox" class="form-check-input" id="is_me_checkbox" name="is_me" value="1">
+    <label class="form-check-label" for="is_me_checkbox">👤 Je suis l'auteur</label>
+</div>
+
+<!-- Switch: Anonyme -->
+<div class="form-check mb-3">
+    <input type="checkbox" class="form-check-input" id="anonymous_checkbox" name="anonymous" value="1">
+    <label class="form-check-label" for="anonymous_checkbox">🤫 Gossip anonyme</label>
+</div>
+
+<!-- Sélection auteur -->
+<div id="author-selection">
+    <div class="mb-3">
+        <label for="gossip_author_id">Auteur existant</label>
+        <%= form.collection_select :author_id,
+  Author.all + User.all.map { |u| UserAsAuthor.new(u) },
+  :id, :fullname,
+  { prompt: "Sélectionne un auteur ou un utilisateur" },
+  { class: "form-select" } %>
+
+    </div>
+
+    <div class="mb-3">
+        <label>Ou entre un nouveau nom d'auteur</label>
+        <input type="text" name="new_author_name" class="form-control" placeholder="Prénom Nom">
+    </div>
+</div>
+
 <%= form.submit "Créer Gossip", class: "btn btn-primary" %>
 <% end %>
+
+<!-- 🧠 JavaScript pour interaction -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const isMeCheckbox = document.getElementById("is_me_checkbox");
+        const anonymousCheckbox = document.getElementById("anonymous_checkbox");
+        const authorSelection = document.getElementById("author-selection");
+
+        function toggleAuthorFields() {
+            if (isMeCheckbox.checked || anonymousCheckbox.checked) {
+                authorSelection.style.display = "none";
+            } else {
+                authorSelection.style.display = "block";
+            }
+        }
+
+        isMeCheckbox.addEventListener("change", toggleAuthorFields);
+        anonymousCheckbox.addEventListener("change", toggleAuthorFields);
+
+        toggleAuthorFields(); // initial call
+    });
+</script>

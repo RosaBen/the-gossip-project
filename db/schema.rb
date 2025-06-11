@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_10_144724) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_11_211315) do
+  create_table "authors", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_authors_on_user_id"
+  end
+
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.string "zip_code"
@@ -25,6 +34,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_10_144724) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "author_id"
+    t.index ["author_id"], name: "index_gossips_on_author_id"
     t.index ["user_id"], name: "index_gossips_on_user_id"
   end
 
@@ -40,4 +51,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_10_144724) do
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
+
+  add_foreign_key "authors", "users"
+  add_foreign_key "gossips", "authors"
 end
