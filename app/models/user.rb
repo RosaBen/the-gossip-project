@@ -4,9 +4,10 @@ class User < ApplicationRecord
 
     validates :email, presence: true, uniqueness: true
 
-  def self.find_by_full_name(first_name, last_name)
-    where("LOWER(first_name) = ? AND LOWER(last_name) = ?", first_name.downcase, last_name.downcase).first
-  end
+def self.find_by_full_name(first_name, last_name)
+  where("LOWER(first_name) = ? AND LOWER(last_name) = ?", first_name.downcase.strip, last_name.downcase.strip).first
+end
+
 
   def fullname
     "#{first_name} #{last_name}".strip

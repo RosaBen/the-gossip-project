@@ -1,5 +1,24 @@
-<div>
-    <h2>Welcome <%= @user.first_name %> <%= @user.last_name %></h2>
-    <button type="button" class="btn welcome"><%= link_to "Voir tous les gossips", gossips_path %>
-    </button>
+<div class="container-fluid p-0">
+    <!-- Bandeau image paysage dynamique de Picsum -->
+    <div class="w-100" style="height: 250px; background-image: url('https://picsum.photos/1200/250?random=<%= rand(1..1000) %>'); background-size: cover; background-position: center;"></div>
+
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <!-- Texte à gauche -->
+            <div class="col-md-6 text-start">
+                <h1 class="display-4 text-primary mb-4">
+                    Bienvenue <%= @user.first_name %> <%= @user.last_name %> 🎉
+                </h1>
+                <p class="lead mb-4">
+                    Tu es maintenant connecté ! Tu peux parcourir tous les gossips de la communauté.
+                </p>
+                <%= link_to "Voir tous les gossips", gossips_path, class: "btn btn-lg btn-outline-primary" %>
+            </div>
+
+            <!-- Image aléatoire à droite -->
+            <div class="col-md-6 text-center">
+                <%= image_tag "https://picsum.photos/400/300?random=#{rand(1000)}", alt: "Image aléatoire", class: "img-fluid rounded shadow" %>
+            </div>
+        </div>
+    </div>
 </div>
