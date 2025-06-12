@@ -1,0 +1,29 @@
+<h2 class="mb-4">Modifier le Gossip</h2>
+
+<%= form_with model: @gossip, local: true do |form| %>
+<% if @gossip.errors.any? %>
+<div class="alert alert-danger">
+    <h4><%= pluralize(@gossip.errors.count, "erreur") %> empêchent la sauvegarde :</h4>
+    <ul>
+        <% @gossip.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="mb-3">
+    <%= form.label :title, "Titre", class: "form-label" %>
+    <%= form.text_field :title, class: "form-control" %>
+</div>
+
+<div class="mb-3">
+    <%= form.label :content, "Contenu", class: "form-label" %>
+    <%= form.text_area :content, class: "form-control", rows: 5 %>
+</div>
+
+<%= form.submit "Enregistrer", class: "btn btn-success" %>
+<% end %>
+
+<%= link_to "← Retour au Gossip", gossip_path(@gossip), class: "btn btn-outline-primary mt-3 me-2" %>
+<%= link_to "← Retour à la liste", gossips_path, class: "btn btn-outline-secondary mt-3" %>

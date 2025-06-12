@@ -24,11 +24,15 @@
 
                 <p class="text-muted small mb-3">
                     Par <strong><%= @gossip.author.fullname %></strong>
-                    <% if @gossip.author.user&.city %>
-                    de <strong><%= @gossip.author.user.city.name %></strong>
+                    <% if @gossip.author&.linked_user && @gossip.author.linked_user.city %>
+
+
+                    de <strong><%= link_to gossip.author.linked_user.city.name, city_path(gossip.author.linked_user.city), class: "text-decoration-none" %></strong>
                     <% end %>
                     • <%= l(@gossip.created_at, format: :long) %>
                 </p>
+                <%= link_to "Modifier ce Gossip", edit_gossip_path(@gossip), class: "btn btn-warning me-2" %>
+
             </div>
         </div>
 
