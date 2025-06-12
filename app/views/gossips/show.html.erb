@@ -1,11 +1,16 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <%= link_to "← Retour à la liste", gossips_path, class: "btn btn-outline-secondary" %>
+    <%= link_to "📝 Créer un nouveau gossip", new_gossip_path, class: "btn btn-primary" %>
+</div>
 <div class="card mb-5 shadow-sm">
     <div class="row g-0">
+
         <!-- Colonne image -->
         <div class="col-md-4 d-flex align-items-center justify-content-center p-4">
             <%= image_tag 'placeholder_avatar.png',
-                    alt: @gossip.user.fullname,
-                    class: "img-fluid rounded-circle border border-2 border-primary",
-                    style: "max-width: 150px;" %>
+              alt: @gossip.author.fullname,
+              class: "img-fluid rounded-circle border border-2 border-primary",
+              style: "max-width: 150px;" %>
         </div>
 
         <!-- Colonne contenu -->
@@ -18,13 +23,14 @@
                 </div>
 
                 <p class="text-muted small mb-3">
-                    Par <strong><%= @gossip.user.fullname %></strong>
-                    <% if @gossip.user.city %>de <strong><%= @gossip.user.city.name %></strong><% end %>
+                    Par <strong><%= @gossip.author.fullname %></strong>
+                    <% if @gossip.author.user&.city %>
+                    de <strong><%= @gossip.author.user.city.name %></strong>
+                    <% end %>
                     • <%= l(@gossip.created_at, format: :long) %>
                 </p>
-
-                <%= link_to "← Retour à la liste", gossips_path, class: "btn btn-outline-primary" %>
             </div>
         </div>
+
     </div>
 </div>
