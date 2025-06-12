@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <%= link_to "← Retour à la liste", gossips_path, class: "btn btn-outline-secondary" %>
+</div>
+
+<div class="card mb-4 shadow-sm">
+    <div class="row g-0">
+        <!-- Image -->
+        <div class="col-md-4 d-flex align-items-center justify-content-center p-4">
+            <%= image_tag 'placeholder_avatar.png',
+        alt: @user.fullname,
+        class: "img-fluid rounded-circle border border-2 border-primary",
+        style: "max-width: 150px;" %>
+        </div>
+
+        <!-- Infos utilisateur -->
+        <div class="col-md-8">
+            <div class="card-body">
+                <h2 class="card-title text-primary mb-1"><%= @user.fullname %></h2>
+                <p class="text-muted mb-2"><%= @user.email %></p>
+
+                <div class="speech-bubble bg-light p-3 mb-3">
+                    <%= simple_format(@user.description || "Pas de description.") %>
+                </div>
+
+                <p class="text-muted small mb-0">
+                    Habite à <%= @user.city.name if @user.city %> • Inscrit le <%= l(@user.created_at, format: :long) %>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Ses Gossips</h3>
+<% if @gossips.any? %>
+<% @gossips.each do |gossip| %>
+<div class="card mb-3 shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title text-primary"><%= gossip.title %></h5>
+        <p class="card-text"><%= truncate(gossip.content, length: 120) %></p>
+        <%= link_to "Lire plus", gossip_path(gossip), class: "btn btn-outline-primary btn-sm" %>
+    </div>
+</div>
+<% end %>
+<% else %>
+<p class="text-muted">Cet utilisateur n’a publié aucun gossip.</p>
+<% end %>

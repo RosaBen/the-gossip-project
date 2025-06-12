@@ -15,6 +15,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+     author = @user.author
+    @gossips = author.present? ? author.gossips : []
   end
   # path: user_path(@user)
 

@@ -25,6 +25,13 @@
                     </p>
 
                     <%= link_to "Lire plus", gossip_path(gossip), class: "btn btn-outline-primary mt-2" %>
+                    <% if gossip.author&.showable_profile? %>
+                    <%= link_to "Voir le profil de l'auteur", user_path(gossip.author.user), class: "btn btn-outline-secondary mt-2" %>
+                    <% end %>
+
+
+
+
                 </div>
             </div>
         </div>

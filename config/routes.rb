@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # get "up" => "rails/health#show", as: :rails_health_check
   # get "/teams", to: "teams#index"
 
-get '/test_flash', to: 'test#show'
+
 
   get "/login", to: "sessions#new", as: "login"
   post "/login",  to: "sessions#create"
