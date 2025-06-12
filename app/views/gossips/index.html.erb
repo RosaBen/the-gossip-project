@@ -24,12 +24,18 @@
                         <% end %>
 
                     </p>
-
+                    <% if gossip.comments.any? %>
+                    <p class="text-muted small mt-2">
+                        💬 <%= pluralize(gossip.comments.count, "commentaire") %>
+                    </p>
+                    <% end %>
                     <%= link_to "Lire plus", gossip_path(gossip), class: "btn btn-outline-primary mt-2" %>
                     <% if (user = gossip.author&.linked_user) %>
                     <%= link_to "Voir le profil de l'auteur", user_path(user), class: "btn btn-outline-secondary mt-2" %>
                     <% end %>
                 </div>
+
+
             </div>
         </div>
         <% end %>
