@@ -32,6 +32,10 @@
                     • <%= l(@gossip.created_at, format: :long) %>
                 </p>
                 <%= link_to "Modifier ce Gossip", edit_gossip_path(@gossip), class: "btn btn-warning me-2" %>
+                <%= link_to "🗑️ Supprimer", gossip_path(@gossip), 
+            method: :delete, 
+            data: { confirm: "Es-tu sûr de vouloir supprimer ce gossip ?" },
+            class: "btn btn-danger mt-3" %>
 
             </div>
         </div>

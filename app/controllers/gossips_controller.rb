@@ -92,6 +92,18 @@ end
   end
   end
 
+  def destroy
+  @gossip = Gossip.find(params[:id])
+  if @gossip.destroy
+    flash[:notice] = "Le gossip a bien été supprimé."
+    redirect_to gossips_path
+  else
+    flash[:alert] = "Une erreur est survenue lors de la suppression."
+    redirect_to gossip_path(@gossip)
+  end
+  end
+
+
   private
 
   def gossip_params
