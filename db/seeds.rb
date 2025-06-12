@@ -13,12 +13,16 @@ require "faker"
 puts "Nettoyage des données..."
 
 City.delete_all
-User.delete_all
+
 Gossip.delete_all
+Author.delete_all
+User.delete_all
+
 
 ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='cities'")
 ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='users'")
 ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='gossips'")
+ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='authors'")
 
 
 puts "Ajout des villes"
@@ -30,7 +34,6 @@ puts "Ajout des villes"
 end
 
 puts "Ajout des utilisateurs"
-User.create!(first_name: "Anonymous", last_name: "", email: "anonymous@test.com", description: "", age: 18, city_id: 1)
 10.times do
     User.create!(
         last_name: Faker::Name.last_name,
@@ -54,11 +57,10 @@ puts "Ajouts des gossips"
 end
 
 puts "ajouts des auteurs"
-
+Author.create!(first_name: "Anonymous", last_name: "")
 10.times do
 Author.create!(
     last_name: Faker::Name.last_name,
         first_name: Faker::Name.first_name
 )
 end
-

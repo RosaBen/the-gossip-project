@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "cities/show"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -16,6 +17,7 @@ get "/static_pages/contact", to: "static_pages#contact", as: "contact"
  get "/static_pages/team", to: "static_pages#team", as: "team"
 resources :gossips
 resources :users
+resources :cities
   # resources :sessions
   # resources :static_pages, only: [] do
   #   collection do

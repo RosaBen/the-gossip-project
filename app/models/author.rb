@@ -7,12 +7,16 @@ def anonymous?
   fullname.to_s.strip.downcase == "anonymous"
 end
 
-  def linked_to_user?
-    user.present?
-  end
+def linked_user
+  User.find_by(
+    "LOWER(first_name) = ? AND LOWER(last_name) = ?",
+    first_name.to_s.strip.downcase,
+    last_name.to_s.strip.downcase
+  )
+end
 
 def showable_profile?
-  linked_to_user? && !anonymous?
+  linked_user.present?
 end
 
 

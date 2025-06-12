@@ -18,20 +18,17 @@
                         <strong>
                             <%= gossip.author&.fullname || "Auteur inconnu" %>
                         </strong>
-                        <% if gossip.author&.user&.city %>
-                        de <strong><%= gossip.author.user.city.name %></strong>
+                        <% if gossip.author&.linked_user && gossip.author.linked_user.city %>
+
+                        de <strong><%= link_to gossip.author.linked_user.city.name, city_path(gossip.author.linked_user.city), class: "text-decoration-none" %></strong>
                         <% end %>
 
                     </p>
 
                     <%= link_to "Lire plus", gossip_path(gossip), class: "btn btn-outline-primary mt-2" %>
-                    <% if gossip.author&.showable_profile? %>
-                    <%= link_to "Voir le profil de l'auteur", user_path(gossip.author.user), class: "btn btn-outline-secondary mt-2" %>
+                    <% if (user = gossip.author&.linked_user) %>
+                    <%= link_to "Voir le profil de l'auteur", user_path(user), class: "btn btn-outline-secondary mt-2" %>
                     <% end %>
-
-
-
-
                 </div>
             </div>
         </div>
