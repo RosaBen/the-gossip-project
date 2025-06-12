@@ -1,21 +1,24 @@
 Rails.application.routes.draw do
-  get "cities/show"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  devise_for :users
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  # get "up" => "rails/health#show", as: :rails_health_check
-  # get "/teams", to: "teams#index"
+ # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+ # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+ # Can be used by load balancers and uptime monitors to verify that the app is live.
+ # get "up" => "rails/health#show", as: :rails_health_check
+ # get "/teams", to: "teams#index"
 
 
 
-  get "/login", to: "sessions#new", as: "login"
-  post "/login",  to: "sessions#create"
-  delete "/logout", to: "sessions#destroy", as: "logout"
- get "/welcome/:first_name/:last_name", to: "users#welcome", as: "welcome"
+ # get "/login", to: "sessions#new", as: "login"
+ # post "/login",  to: "sessions#create"
+ # delete "/logout", to: "sessions#destroy", as: "logout"
+ get "/welcome", to: "users#welcome", as: "welcome"
 get "/static_pages/contact", to: "static_pages#contact", as: "contact"
  get "/static_pages/team", to: "static_pages#team", as: "team"
-resources :gossips
+resources :gossips do
+  resources :comments
+end
 resources :users
 resources :cities
   # resources :sessions

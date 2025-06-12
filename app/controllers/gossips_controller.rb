@@ -1,12 +1,6 @@
 class GossipsController < ApplicationController
-  before_action :require_login
+  # before_action :authenticate_user!
 
-  def require_login
-    unless session[:user_id]
-      flash[:alert] = "🚫 Connecte-toi d'abord."
-      redirect_to login_path
-    end
-  end
 
   def index
     @gossips = Gossip.order(created_at: :desc)
@@ -25,7 +19,7 @@ class GossipsController < ApplicationController
     puts params.inspect
     puts "-----------------"
 
-    user = User.find(session[:user_id]) # current_user
+    user = current_user
     @gossip = Gossip.new(gossip_params)
     @gossip.user = user
 

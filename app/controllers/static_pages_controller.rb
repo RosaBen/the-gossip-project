@@ -17,9 +17,20 @@ class StaticPagesController < ApplicationController
 
   # path: team
   # ----------------------------------------------------------
-  def home
-    @gossips = Gossip.order("RANDOM()").limit(5)
+def home
+  @gossips = Gossip.order("RANDOM()").limit(5)
+  @gossips_data = @gossips.each_with_index.map do |gossip, index|
+    {
+      gossip: gossip,
+      color: ['#fffd82', '#ffc9de', '#c9f2ff', '#d1ffc9', '#ffe0ac'][index % 5],
+      rotation: [-5, 3, -2, 4, -4][index % 5],
+      top: rand(0..150),
+      left: rand(0..300),
+      z: 10 - index
+    }
   end
+end
+
   # path: home
   # ----------------------------------------------------------
 end

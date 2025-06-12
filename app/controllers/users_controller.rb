@@ -1,15 +1,12 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [ :welcome, :show, :index ]
   def index
     @users = User.all
   end
   # path: users_path
 
   def welcome
-    @user = User.find_by(id: session[:user_id])
-
-    unless @user
-      redirect_to login_path, flash[:alert]= "Veuillez vous connecter"
-    end
+@user = current_user
   end
   # path: users_welcome_path
 

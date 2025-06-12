@@ -20,21 +20,22 @@
         <% colors = ['#fffd82', '#ffc9de', '#c9f2ff', '#d1ffc9', '#ffe0ac'] %>
         <% rotations = [-5, 3, -2, 4, -4] %>
 
-        <% @gossips.each_with_index do |gossip, index| %>
+        <% @gossips_data.each do |data| %>
         <div class="postit-card shadow position-absolute p-3" style="
-        width: 200px;
-        background-color: <%= colors[index % colors.length] %>;
-        transform: rotate(<%= rotations[index % rotations.length] %>deg);
-        top: <%= rand(0..150) %>px;
-        left: <%= rand(0..300) %>px;
-        z-index: <%= 10 - index %>;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-      ">
-            <h5 class="fw-bold"><%= truncate(gossip.title, length: 25) %></h5>
-            <p class="small"><%= truncate(gossip.content, length: 100) %></p>
-            <%= link_to "Lire", gossip_path(gossip), class: "btn btn-sm btn-outline-dark" %>
+      width: 200px;
+      background-color: <%= data[:color] %>;
+      transform: rotate(<%= data[:rotation] %>deg);
+      top: <%= data[:top] %>px;
+      left: <%= data[:left] %>px;
+      z-index: <%= data[:z] %>;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    ">
+            <h5 class="fw-bold"><%= truncate(data[:gossip].title, length: 25) %></h5>
+            <p class="small"><%= truncate(data[:gossip].content, length: 100) %></p>
+            <%= link_to "Lire", gossip_path(data[:gossip]), class: "btn btn-sm btn-outline-dark" %>
         </div>
         <% end %>
+
     </div>
 </div>

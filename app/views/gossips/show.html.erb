@@ -8,7 +8,7 @@
         <!-- Colonne image -->
         <div class="col-md-4 d-flex align-items-center justify-content-center p-4">
             <%= image_tag 'placeholder_avatar.png',
-              alt: @gossip.author.fullname,
+              alt: @gossip.author&.fullname || "Auteur inconnu",
               class: "img-fluid rounded-circle border border-2 border-primary",
               style: "max-width: 150px;" %>
         </div>
@@ -23,11 +23,13 @@
                 </div>
 
                 <p class="text-muted small mb-3">
+                    <% if @gossip.author.present? %>
                     Par <strong><%= @gossip.author.fullname %></strong>
                     <% if @gossip.author&.linked_user && @gossip.author.linked_user.city %>
-
-
-                    de <strong><%= link_to gossip.author.linked_user.city.name, city_path(gossip.author.linked_user.city), class: "text-decoration-none" %></strong>
+                    de <strong><%= link_to @gossip.author.linked_user.city.name, city_path(@gossip.author.linked_user.city), class: "text-decoration-none" %></strong>
+                    <% end %>
+                    <% else %>
+                    <em>Auteur inconnu</em>
                     <% end %>
                     • <%= l(@gossip.created_at, format: :long) %>
                 </p>
@@ -36,6 +38,26 @@
             method: :delete, 
             data: { confirm: "Es-tu sûr de vouloir supprimer ce gossip ?" },
             class: "btn btn-danger mt-3" %>
+            </div>
+            <div>
+                <% if user_signed_in? %>
+
+                <button class="btn btn-outline-primary mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#commentForm">
+                    💬 Ajouter un commentaire
+                </button>
+
+                <div class="collapse mt-3" id="commentForm">
+                    <%= form_with model: [@gossip, Comment.new], local: true do |form| %>
+                    <div class="mb-3">
+                        <%= form.label :content, "Votre commentaire", class: "form-label" %>
+                        <%= form.text_area :content, class: "form-control", rows: 3, maxlength: 400 %>
+                    </div>
+                    <%= form.submit "Envoyer", class: "btn btn-success" %>
+                    <% end %>
+                </div>
+                <% else %>
+                <p class="text-muted mt-3">Connecte-toi pour ajouter un commentaire.</p>
+                <% end %>
 
             </div>
         </div>
