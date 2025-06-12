@@ -60,6 +60,30 @@
                 <% end %>
 
             </div>
+            <!-- Liste des commentaires -->
+            <% if @gossip.comments.any? %>
+            <div class="card shadow-sm border border-info mb-4 mt-5">
+                <div class="card-header bg-info text-white">
+                    💬 <strong><%= pluralize(@gossip.comments.count, "Commentaire") %></strong>
+                </div>
+                <div class="card-body">
+                    <% @gossip.comments.each do |comment| %>
+                    <div class="mb-3 p-3 border rounded bg-light">
+                        <p class="mb-1"><%= simple_format(comment.content) %></p>
+                        <p class="text-muted small mb-0">
+                            Posté le <%= l(comment.created_at, format: :short) %>
+                            <% if comment.user.present? %>
+                            par <strong><%= comment.user.email %></strong>
+                            <% end %>
+                        </p>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+            <% else %>
+            <p class="text-muted mt-4">Aucun commentaire pour le moment.</p>
+            <% end %>
+
         </div>
 
     </div>
